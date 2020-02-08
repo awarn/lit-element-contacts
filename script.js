@@ -45,6 +45,11 @@ contacts = [
 	}
 ];
 
+function closeDetails() {
+	var detailsElement = document.getElementById('contactDetails');
+	detailsElement.classList.add("hidden");
+}
+
 function showDetails(contactId) {
 	var detailsElement = document.getElementById('contactDetails'); // Fragment
 
@@ -89,9 +94,7 @@ window.onload = function () {
 					toggleFavourite(contactId, e.currentTarget);
 				}
 
-				document.getElementById('close-details').onclick = function () {
-					contactDetails.setAttribute("class", "hidden");
-				}
+				document.getElementById('close-details').onclick = closeDetails;
 			};
 
 			document.getElementById("contact-list").appendChild(el);
