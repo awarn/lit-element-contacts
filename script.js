@@ -1,49 +1,4 @@
-contacts = [
-	{
-		"name": "Roselyn Hahn",
-		"email": "roselyn.hahn@example.com"
-	},
-	{
-		"name": "Javon Gleichner",
-		"email": "javon.gleichner@example.com"
-	},
-	{
-		"name": "Madonna Metz",
-		"email": "madonna.metz@example.com"
-	},
-	{
-		"name": "Jeffrey Ryan",
-		"email": "jeffrey.ryan@example.com"
-	},
-	{
-		"name": "Nat Stiedemann",
-		"email": "nat.stiedemann@example.com"
-	},
-	{
-		"name": "Nicklaus Stokes",
-		"email": "nicklaus.stokes@example.com"
-	},
-	{
-		"name": "Morris Bechtelar",
-		"email": "morris.bechtelar@example.com"
-	},
-	{
-		"name": "Michale Hammes",
-		"email": "michale.hammes@example.com"
-	},
-	{
-		"name": "Keyon Herzog",
-		"email": "keyon.herzog@example.com"
-	},
-	{
-		"name": "Brody Schaefer",
-		"email": "brody.schaefer@example.com"
-	},
-	{
-		"name": "Stacey Kozey",
-		"email": "stacey.kozey@example.com"
-	}
-];
+import ContactStore from "./contact-store.js"
 
 function closeDetails() {
 	var detailsElement = document.getElementById("contact-details");
@@ -51,42 +6,40 @@ function closeDetails() {
 }
 
 function showDetails(contactId) {
-	var detailsElement = document.getElementById("contact-details"); // Fragment
-
-	var contact = contacts[contactId]; // null check?
-
-	var favouriteClass = contact.favourite ? "favourite" : "";
-
-	detailsElement.innerHTML =
-		'<span id="close-details">x</span>' +
-		'<span id="favourite" class="' + favouriteClass + '">*</span>' +
-		"<div>" + contact.name + "</div>" +
-		"<div>" + contact.email + "</div>";
-
-	detailsElement.classList.remove("hidden"); // Global "hidden" klass är inte min favorit.
+	ContactStore.setCurrentContact(contactId);
 }
 
-function toggleFavourite(contactId, favouriteElement) {
-	contacts[contactId].favourite = !contacts[contactId].favourite;
-
-	if (contacts[contactId].favourite) {
-		favouriteElement.classList.add("favourite");
-	} else {
-		favouriteElement.classList.remove("favourite");
-	}
+function toggleFavourite(contactId) {
+	ContactStore.toggleFavourite(contactId);
 }
 
-function renderList() {
-	var listFragment = document.createDocumentFragment();
+function renderList(contacts, searchQuery, filterByFavourites) {
+	let listFragment = document.createDocumentFragment();
 
-	for (var i = 0; i < contacts.length; i++) {
-		var el = document.createElement("div");
-		el.innerHTML = contacts[i].name;
+	for (let i = 0; i < contacts.length; i++) {
+		const contact = contacts[i];
+
+		let el = document.createElement("div");
+		el.innerHTML = contact.name;
 		el.className = "contact-name";
 		el.id = i; // Modell i vyn.
 
+		if (contact.favourite) {
+			el.classList.add("favourite");
+		}
+		else if (filterByFavourites) {
+			el.classList.add("hidden");
+		}
+
+		if (searchQuery) {
+			let regexp = new RegExp(searchQuery);
+			if (!regexp.test(contact.name.toLowerCase())) {
+				el.classList.add("hidden");
+			}
+		}
+
 		el.onclick = e => {
-			var contactId = parseInt(e.currentTarget.id);
+			let contactId = parseInt(e.currentTarget.id);
 			showDetails(contactId);
 
 			document.getElementById("favourite").onclick = function (e) {
@@ -99,47 +52,62 @@ function renderList() {
 		listFragment.appendChild(el);
 	}
 
-	document.getElementById("contact-list").appendChild(listFragment);
+	let contactListElement = document.getElementById("contact-list");
+	contactListElement.innerHTML = "";
+	contactListElement.appendChild(listFragment);
+}
+
+function renderDetails(contact) {
+	if (!contact) {
+		return;
+	}
+
+	let detailsElement = document.getElementById("contact-details"); // Fragment
+
+	let favouriteClass = contact.favourite ? "favourite" : "";
+
+	detailsElement.innerHTML =
+		'<span id="close-details">x</span>' +
+		'<span id="favourite" class="' + favouriteClass + '">*</span>' +
+		"<div>" + contact.name + "</div>" +
+		"<div>" + contact.email + "</div>";
+
+	detailsElement.classList.remove("hidden"); // Global "hidden" klass är inte min favorit.
 }
 
 function initFilter() {
 	document.getElementById("contact-filter").onclick = function (e) {
-		var contactNames = document.querySelectorAll(".contact-name");
+		ContactStore.toggleFilterByFavourites();
 
 		if (e.currentTarget.innerText === "Visa alla") {
-			e.currentTarget.innerText = "Filtrera favoriter"
-			contactNames.forEach(function (node, i) {
-				node.setAttribute("class", "contact-name");
-			})
+			e.currentTarget.innerText = "Filtrera favoriter";
 		} else {
 			e.currentTarget.innerText = "Visa alla";
-			contactNames.forEach(function (node, i) {
-				if (contacts[i].favourite) {
-					node.setAttribute("class", "contact-name");
-				} else {
-					node.setAttribute("class", "hidden contact-name");
-				}
-			})
 		}
 	};
 }
 
 function initSearch() {
 	document.getElementById("search-button").onclick = function () {
-		var contactNames = document.querySelectorAll(".contact-name");
-		contactNames.forEach(function (node) {
-			var regexp = new RegExp(document.getElementById("search").value.toLowerCase());
-			if (regexp.test(node.innerText.toLowerCase())) {
-				node.setAttribute("class", "contact-name");
-			} else {
-				node.setAttribute("class", "hidden contact-name");
-			}
-		})
+		let query = document.getElementById("search").value.toLowerCase();
+		ContactStore.searchFor(query);
+	}
+}
+
+class ContactList {
+	constructor() {
+		ContactStore.addListener(this);
+		ContactStore.showAllContacts();
+		initFilter();
+		initSearch();
+	}
+
+	stateChanged(state) {
+		renderList(state.contacts, state.searchQuery, state.isFilteredByFavourites);
+		renderDetails(state.contacts[state.currentContact]);
 	}
 }
 
 window.onload = function () {
-	renderList();
-	initFilter();
-	initSearch();
+	let list = new ContactList();
 };

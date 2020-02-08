@@ -89,7 +89,7 @@ window.onload = function () {
     document.getElementById('contactFilter').onclick = function (e) {
       var contactNames = document.querySelectorAll('.contactName');
 
-      if (e.currentTarget.innerText === "Visa alla") {
+      if (e.currentTarget.innerText === "Visa alla") { // Modell i vyn
         e.currentTarget.innerText = "Filtrera favoriter"
         contactNames.forEach(function (node, i) {
           node.setAttribute("class", "contactName");
@@ -97,7 +97,7 @@ window.onload = function () {
       } else {
         e.currentTarget.innerText = "Visa alla";
         contactNames.forEach(function (node, i) {
-          if (contacts[i].favourite) {
+          if (contacts[i].favourite) { // Antar ordning i 'contacts'.
             node.setAttribute("class", "contactName");
           } else {
             node.setAttribute("class", "hidden contactName");
