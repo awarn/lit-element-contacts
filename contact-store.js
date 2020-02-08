@@ -65,7 +65,11 @@ class Store {
 
 class ContactStore extends Store {
 	state = {
-		contacts: contacts,
+		contacts: contacts.reduce((collection, contact, i) => {
+			contact.id = i;
+			collection[i] = contact;
+			return collection;
+		}, {}),
 		searchQuery: null,
 		isFilteredByFavourites: false,
 		currentContact: null
@@ -95,6 +99,30 @@ class ContactStore extends Store {
 		this.searchQuery = "";
 		this.isFilteredByFavourites = false;
 		this.stateChanged();
+	}
+
+	getContactsList(state) {
+		return Object.values(state.contacts);
+	}
+
+	getFilteredContactsList(state) {
+		return Object.values(state.contacts)
+			.filter((contact) => {
+				return !state.isFilteredByFavourites || contact.favourite;
+			})
+			.filter((contact) => {
+				if (state.searchQuery) {
+					let regexp = new RegExp(state.searchQuery);
+					if (!regexp.test(contact.name.toLowerCase())) {
+						return false;
+					}
+				}
+				return true;
+			});
+	}
+
+	getCurrentContact(state) {
+		return state.contacts[state.currentContact];
 	}
 }
 
