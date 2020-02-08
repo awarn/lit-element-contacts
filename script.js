@@ -78,6 +78,8 @@ function toggleFavourite(contactId, favouriteElement) {
 
 window.onload = function () {
 	function render() {
+		var listFragment = document.createDocumentFragment();
+
 		for (var i = 0; i < contacts.length; i++) {
 			var el = document.createElement("div");
 			el.innerHTML = contacts[i].name;
@@ -95,8 +97,10 @@ window.onload = function () {
 				document.getElementById('close-details').onclick = closeDetails;
 			};
 
-			document.getElementById("contact-list").appendChild(el);
+			listFragment.appendChild(el);
 		}
+
+		document.getElementById("contact-list").appendChild(listFragment);
 
 		document.getElementById('contactFilter').onclick = function (e) {
 			var contactNames = document.querySelectorAll('.contactName');
