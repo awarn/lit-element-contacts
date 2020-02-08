@@ -78,8 +78,6 @@ function toggleFavourite(contactId, favouriteElement) {
 
 window.onload = function () {
 	function render() {
-		document.getElementById("contact-list").innerHTML = "";
-
 		for (var i = 0; i < contacts.length; i++) {
 			var el = document.createElement("div");
 			el.innerHTML = contacts[i].name;
