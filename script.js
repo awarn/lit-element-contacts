@@ -90,10 +90,8 @@ window.onload = function () {
 				}
 
 				document.getElementById('close-details').onclick = function () {
-					contactDetails.innerHTML = "";
 					contactDetails.setAttribute("class", "hidden");
 				}
-
 			};
 
 			document.getElementById("contact-list").appendChild(el);
