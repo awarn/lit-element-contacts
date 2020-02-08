@@ -46,12 +46,12 @@ contacts = [
 ];
 
 function closeDetails() {
-	var detailsElement = document.getElementById("contactDetails");
+	var detailsElement = document.getElementById("contact-details");
 	detailsElement.classList.add("hidden");
 }
 
 function showDetails(contactId) {
-	var detailsElement = document.getElementById("contactDetails"); // Fragment
+	var detailsElement = document.getElementById("contact-details"); // Fragment
 
 	var contact = contacts[contactId]; // null check?
 
@@ -82,7 +82,7 @@ function renderList() {
 	for (var i = 0; i < contacts.length; i++) {
 		var el = document.createElement("div");
 		el.innerHTML = contacts[i].name;
-		el.className = "contactName";
+		el.className = "contact-name";
 		el.id = i; // Modell i vyn.
 
 		el.onclick = e => {
@@ -103,21 +103,21 @@ function renderList() {
 }
 
 function initFilter() {
-	document.getElementById("contactFilter").onclick = function (e) {
-		var contactNames = document.querySelectorAll(".contactName");
+	document.getElementById("contact-filter").onclick = function (e) {
+		var contactNames = document.querySelectorAll(".contact-name");
 
 		if (e.currentTarget.innerText === "Visa alla") {
 			e.currentTarget.innerText = "Filtrera favoriter"
 			contactNames.forEach(function (node, i) {
-				node.setAttribute("class", "contactName");
+				node.setAttribute("class", "contact-name");
 			})
 		} else {
 			e.currentTarget.innerText = "Visa alla";
 			contactNames.forEach(function (node, i) {
 				if (contacts[i].favourite) {
-					node.setAttribute("class", "contactName");
+					node.setAttribute("class", "contact-name");
 				} else {
-					node.setAttribute("class", "hidden contactName");
+					node.setAttribute("class", "hidden contact-name");
 				}
 			})
 		}
@@ -126,13 +126,13 @@ function initFilter() {
 
 function initSearch() {
 	document.getElementById("search-button").onclick = function () {
-		var contactNames = document.querySelectorAll(".contactName");
+		var contactNames = document.querySelectorAll(".contact-name");
 		contactNames.forEach(function (node) {
 			var regexp = new RegExp(document.getElementById("search").value.toLowerCase());
 			if (regexp.test(node.innerText.toLowerCase())) {
-				node.setAttribute("class", "contactName");
+				node.setAttribute("class", "contact-name");
 			} else {
-				node.setAttribute("class", "hidden contactName");
+				node.setAttribute("class", "hidden contact-name");
 			}
 		})
 	}
