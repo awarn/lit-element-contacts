@@ -76,65 +76,70 @@ function toggleFavourite(contactId, favouriteElement) {
 	}
 }
 
-window.onload = function () {
-	function render() {
-		var listFragment = document.createDocumentFragment();
+function renderList() {
+	var listFragment = document.createDocumentFragment();
 
-		for (var i = 0; i < contacts.length; i++) {
-			var el = document.createElement("div");
-			el.innerHTML = contacts[i].name;
-			el.className = 'contactName';
-			el.id = i; // Modell i vyn.
+	for (var i = 0; i < contacts.length; i++) {
+		var el = document.createElement("div");
+		el.innerHTML = contacts[i].name;
+		el.className = 'contactName';
+		el.id = i; // Modell i vyn.
 
-			el.onclick = e => {
-				var contactId = parseInt(e.currentTarget.id);
-				showDetails(contactId);
+		el.onclick = e => {
+			var contactId = parseInt(e.currentTarget.id);
+			showDetails(contactId);
 
-				document.getElementById('favourite').onclick = function (e) {
-					toggleFavourite(contactId, e.currentTarget);
-				}
-
-				document.getElementById('close-details').onclick = closeDetails;
-			};
-
-			listFragment.appendChild(el);
-		}
-
-		document.getElementById("contact-list").appendChild(listFragment);
-
-		document.getElementById('contactFilter').onclick = function (e) {
-			var contactNames = document.querySelectorAll('.contactName');
-
-			if (e.currentTarget.innerText === "Visa alla") {
-				e.currentTarget.innerText = "Filtrera favoriter"
-				contactNames.forEach(function (node, i) {
-					node.setAttribute("class", "contactName");
-				})
-			} else {
-				e.currentTarget.innerText = "Visa alla";
-				contactNames.forEach(function (node, i) {
-					if (contacts[i].favourite) {
-						node.setAttribute("class", "contactName");
-					} else {
-						node.setAttribute("class", "hidden contactName");
-					}
-				})
+			document.getElementById('favourite').onclick = function (e) {
+				toggleFavourite(contactId, e.currentTarget);
 			}
+
+			document.getElementById('close-details').onclick = closeDetails;
 		};
 
-		document.getElementById('search-button').onclick = function () {
-			var contactNames = document.querySelectorAll('.contactName');
-			contactNames.forEach(function (node) {
-				var regexp = new RegExp(document.getElementById('search').value.toLowerCase());
-				if (regexp.test(node.innerText.toLowerCase())) {
+		listFragment.appendChild(el);
+	}
+
+	document.getElementById("contact-list").appendChild(listFragment);
+}
+
+function initFilter() {
+	document.getElementById('contactFilter').onclick = function (e) {
+		var contactNames = document.querySelectorAll('.contactName');
+
+		if (e.currentTarget.innerText === "Visa alla") {
+			e.currentTarget.innerText = "Filtrera favoriter"
+			contactNames.forEach(function (node, i) {
+				node.setAttribute("class", "contactName");
+			})
+		} else {
+			e.currentTarget.innerText = "Visa alla";
+			contactNames.forEach(function (node, i) {
+				if (contacts[i].favourite) {
 					node.setAttribute("class", "contactName");
 				} else {
 					node.setAttribute("class", "hidden contactName");
 				}
 			})
-
 		}
-	}
+	};
+}
 
-	render();
+function initSearch() {
+	document.getElementById('search-button').onclick = function () {
+		var contactNames = document.querySelectorAll('.contactName');
+		contactNames.forEach(function (node) {
+			var regexp = new RegExp(document.getElementById('search').value.toLowerCase());
+			if (regexp.test(node.innerText.toLowerCase())) {
+				node.setAttribute("class", "contactName");
+			} else {
+				node.setAttribute("class", "hidden contactName");
+			}
+		})
+	}
+}
+
+window.onload = function () {
+	renderList();
+	initFilter();
+	initSearch();
 };
