@@ -46,20 +46,20 @@ contacts = [
 ];
 
 function closeDetails() {
-	var detailsElement = document.getElementById('contactDetails');
+	var detailsElement = document.getElementById("contactDetails");
 	detailsElement.classList.add("hidden");
 }
 
 function showDetails(contactId) {
-	var detailsElement = document.getElementById('contactDetails'); // Fragment
+	var detailsElement = document.getElementById("contactDetails"); // Fragment
 
 	var contact = contacts[contactId]; // null check?
 
 	var favouriteClass = contact.favourite ? "favourite" : "";
 
 	detailsElement.innerHTML =
-		"<span id='close-details'>x</span>" +
-		"<span id='favourite' class='" + favouriteClass + "'>*</span>" +
+		'<span id="close-details">x</span>' +
+		'<span id="favourite" class="' + favouriteClass + '">*</span>' +
 		"<div>" + contact.name + "</div>" +
 		"<div>" + contact.email + "</div>";
 
@@ -82,18 +82,18 @@ function renderList() {
 	for (var i = 0; i < contacts.length; i++) {
 		var el = document.createElement("div");
 		el.innerHTML = contacts[i].name;
-		el.className = 'contactName';
+		el.className = "contactName";
 		el.id = i; // Modell i vyn.
 
 		el.onclick = e => {
 			var contactId = parseInt(e.currentTarget.id);
 			showDetails(contactId);
 
-			document.getElementById('favourite').onclick = function (e) {
+			document.getElementById("favourite").onclick = function (e) {
 				toggleFavourite(contactId, e.currentTarget);
 			}
 
-			document.getElementById('close-details').onclick = closeDetails;
+			document.getElementById("close-details").onclick = closeDetails;
 		};
 
 		listFragment.appendChild(el);
@@ -103,8 +103,8 @@ function renderList() {
 }
 
 function initFilter() {
-	document.getElementById('contactFilter').onclick = function (e) {
-		var contactNames = document.querySelectorAll('.contactName');
+	document.getElementById("contactFilter").onclick = function (e) {
+		var contactNames = document.querySelectorAll(".contactName");
 
 		if (e.currentTarget.innerText === "Visa alla") {
 			e.currentTarget.innerText = "Filtrera favoriter"
@@ -125,10 +125,10 @@ function initFilter() {
 }
 
 function initSearch() {
-	document.getElementById('search-button').onclick = function () {
-		var contactNames = document.querySelectorAll('.contactName');
+	document.getElementById("search-button").onclick = function () {
+		var contactNames = document.querySelectorAll(".contactName");
 		contactNames.forEach(function (node) {
-			var regexp = new RegExp(document.getElementById('search').value.toLowerCase());
+			var regexp = new RegExp(document.getElementById("search").value.toLowerCase());
 			if (regexp.test(node.innerText.toLowerCase())) {
 				node.setAttribute("class", "contactName");
 			} else {
