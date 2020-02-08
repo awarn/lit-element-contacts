@@ -6,36 +6,42 @@ export default class ContactDetails {
 	}
 
 	stateChanged(state) {
-		this.render(ContactStore.getCurrentContact(state));
-	}
+		let contact = ContactStore.getCurrentContact(state);
+		let element = document.getElementById("contact-details");
+		element.innerHTML = "";
 
-	closeDetails() {
-		var detailsElement = document.getElementById("contact-details");
-		detailsElement.classList.add("hidden");
+		if (contact) {
+			element.appendChild(this.render(
+				ContactStore.getCurrentContact(state)
+			));
+		}
 	}
 
 	render(contact) {
-		if (!contact) {
-			return;
-		}
-
-		let detailsElement = document.getElementById("contact-details"); // Fragment
-
-		let favouriteClass = contact.favourite ? "favourite" : "";
+		let detailsElement = document.createElement("div");
 
 		detailsElement.innerHTML =
-			'<span id="close-details">x</span>' +
-			'<span id="favourite" class="' + favouriteClass + '">*</span>' +
 			"<div>" + contact.name + "</div>" +
 			"<div>" + contact.email + "</div>";
 
-		detailsElement.classList.remove("hidden"); // Global "hidden" klass är inte min favorit.
+		let closeButton = document.createElement("button");
+		closeButton.onclick = () => {
+			ContactStore.setCurrentContact(null);
+		};
+		closeButton.textContent = "x";
 
-		document.getElementById("favourite").onclick = () => {
+		detailsElement.prepend(closeButton);
+
+		let favouriteButton = document.createElement("button");
+		favouriteButton.onclick = () => {
 			ContactStore.toggleFavourite(contact.id);
 		}
+		favouriteButton.textContent = "*";
+		favouriteButton.className = contact.favourite ? "favourite" : "";
 
-		document.getElementById("close-details").onclick = this.closeDetails;
+		detailsElement.prepend(favouriteButton);
+
+		return detailsElement;
 	}
 }
 
