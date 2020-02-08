@@ -47,7 +47,7 @@ contacts = [
 
 window.onload = function () {
   function render() { // Allt innuti render.
-    document.getElementById("contact-list").innerHTML = "";
+    document.getElementById("contact-list").innerHTML = ""; // Onödig reflow.
 
     for (var i = 0; i < contacts.length; i++) {
       var el = document.createElement("div");
@@ -77,7 +77,7 @@ window.onload = function () {
         }
 
         document.getElementById('close-details').onclick = function () {
-          contactDetails.innerHTML = "";
+          contactDetails.innerHTML = ""; // Onödigt. Plus reflow.
           contactDetails.setAttribute("class", "hidden");
         }
 
