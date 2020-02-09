@@ -2,6 +2,8 @@ import { LitElement, html, css } from "lit-element";
 
 import ContactStore from "./contact-store.js"
 
+import IconButton from "./icon-button.js"
+
 export default class ContactSearch extends LitElement
 {
 	static get properties() {
@@ -16,9 +18,11 @@ export default class ContactSearch extends LitElement
 				display: flex;
 				height: 2rem;
 				border-radius: .25rem;
+				padding: 0 .5rem 0 0;
 				font-weight: bold;
 				background: #5d6961;
 				justify-content: space-between;
+				align-items: center;
 			}
 
 			input[type="text"] {
@@ -55,7 +59,10 @@ export default class ContactSearch extends LitElement
 					type="text"
 					placeholder="Sök"
 					@change="${e => this.query = e.target.value}" />
-				<button>Sök</button>
+				<icon-button
+					label="Sök"
+					icon="magnifier"
+					@click="${this.search}"></icon-button>
 			</form>
 		`;
 	}
