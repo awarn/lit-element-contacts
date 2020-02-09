@@ -1,7 +1,17 @@
 
-class Store {
-	listeners = [];
-	state = {};
+class Store
+{
+	static get properties() {
+		return {
+			listeners: { type: Array },
+			state: { type: Object }
+		}
+	}
+
+	constructor() {
+		this.listeners = [];
+		this.state = {};
+	}
 
 	addListener(listener) {
 		this.listeners.push(listener);
@@ -17,11 +27,20 @@ class Store {
 
 class ContactStore extends Store
 {
-	state = {
-		contacts: [],
-		searchQuery: null,
-		isFilteredByFavourites: false,
-		currentContact: null
+	static get properties() {
+		return {
+			state: { type: Object }
+		}
+	}
+
+	constructor() {
+		super();
+		this.state = {
+			contacts: [],
+			searchQuery: null,
+			isFilteredByFavourites: false,
+			currentContact: null
+		}
 	}
 
 	toggleFavourite(contactId) {
