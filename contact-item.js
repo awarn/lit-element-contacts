@@ -13,9 +13,15 @@ export default class ContactItem extends LitElement
 	static get styles() {
     return css`
 			.contact-item {
+				display: flex;
+				width: 100%;
+				border: none;
 				padding: .5rem;
+				font-size: 1rem;
 				font-weight: bold;
+				color: #fff;
 				background: #5d6961;
+				cursor: pointer;
 			}
 
 			.contact-item.favourite {
@@ -33,9 +39,9 @@ export default class ContactItem extends LitElement
 
 	render() {
 		return html`
-			<div class="contact-item ${this.favourite ? "favourite" : ""}">
+			<button class="contact-item ${this.favourite ? "favourite" : ""}">
 				${this.name}
-			</div>
+			</button>
 		`;
 	}
 }

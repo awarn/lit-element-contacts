@@ -19,6 +19,7 @@ export default class IconButton extends LitElement
 				background-color: transparent;
 				background-size: contain;
 				background-repeat: no-repeat;
+				cursor: pointer;
 			}
 
 			.icon-button--close {
