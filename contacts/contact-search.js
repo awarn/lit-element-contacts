@@ -46,7 +46,8 @@ export default class ContactSearch extends LitElement
 		this.query = "";
 	}
 
-	search() {
+	search(e) {
+		e.preventDefault();
 		ContactStore.searchFor(this.query.toLowerCase());
 	}
 
