@@ -4,7 +4,6 @@ import ContactStore from "./contact-store.js"
 export default class ContactList {
 	constructor() {
 		ContactStore.addListener(this);
-		ContactStore.showAllContacts();
 	}
 
 	stateChanged(state) {

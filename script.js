@@ -26,4 +26,5 @@ window.onload = function () {
 	new ContactList();
 	initFilter();
 	initSearch();
+	ContactStore.showAllContacts();
 };
