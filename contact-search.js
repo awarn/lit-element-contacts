@@ -17,6 +17,7 @@ export default class ContactSearch extends LitElement
 			.contact-search {
 				display: flex;
 				height: 2rem;
+				margin: 0 1rem;
 				border-radius: .25rem;
 				padding: 0 .5rem 0 0;
 				font-weight: bold;

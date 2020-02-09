@@ -15,7 +15,7 @@ export default class ContactList extends LitElement
     return css`
       .contact-list {
         margin: 0;
-        padding: 0;
+        padding: 0 1rem;
 			}
 
 			li {
