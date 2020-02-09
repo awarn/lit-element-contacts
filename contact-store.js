@@ -54,7 +54,7 @@ class ContactStore extends Store {
 					return collection;
 				}, {})
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		} finally {
 			this.stateChanged();
 		}
