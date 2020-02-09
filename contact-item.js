@@ -20,7 +20,7 @@ export default class ContactItem extends LitElement
 				font-size: 1rem;
 				font-weight: bold;
 				color: #fff;
-				background: #5d6961;
+				background: #3a3d52;
 				cursor: pointer;
 			}
 

@@ -20,7 +20,7 @@ export default class ContactDetails extends LitElement
 				margin: 1rem 0;
 				padding: .5rem;
 				border-radius: .25rem;
-				background: rgb(208, 226, 233);
+				background: #b7c0ce;
 				color: #000;
 			}
 

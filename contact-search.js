@@ -21,7 +21,7 @@ export default class ContactSearch extends LitElement
 				border-radius: .25rem;
 				padding: 0 .5rem 0 0;
 				font-weight: bold;
-				background: #5d6961;
+				background: #3a3d52;
 				justify-content: space-between;
 				align-items: center;
 			}
