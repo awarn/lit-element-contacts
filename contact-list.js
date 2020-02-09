@@ -16,7 +16,7 @@ export default class ContactList {
 
 	render(contacts) {
 		let listFragment = document.createDocumentFragment();
-	
+
 		for (let i = 0; i < contacts.length; i++) {
 			const contact = contacts[i];
 			let contactItem = new ContactItem(contact);
@@ -26,7 +26,7 @@ export default class ContactList {
 			};
 			listFragment.appendChild(el);
 		}
-	
+
 		let listElement = document.createElement("ul");
 		listElement.appendChild(listFragment);
 		return listElement;
