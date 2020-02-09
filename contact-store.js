@@ -47,7 +47,6 @@ const contacts = [
 ];
 
 class Store {
-	static instance;
 	listeners = [];
 	state = {};
 
