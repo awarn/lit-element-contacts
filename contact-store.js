@@ -15,7 +15,8 @@ class Store {
 	}
 }
 
-class ContactStore extends Store {
+class ContactStore extends Store
+{
 	state = {
 		contacts: [],
 		searchQuery: null,

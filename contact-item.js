@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit-element";
 
-export default class ContactItem extends LitElement {
+export default class ContactItem extends LitElement
+{
 	static get properties() {
     return {
 			id: { type: String },
