@@ -39,10 +39,6 @@ export default class ContactList extends LitElement
 	constructor() {
 		super();
 		ContactStore.addListener(this);
-		this.contacts = [];
-	}
-
-	firstUpdated() {
 		this.contacts = ContactStore.getFilteredContactsList(ContactStore.state);
 	}
 

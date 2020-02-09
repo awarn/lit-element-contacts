@@ -32,10 +32,6 @@ export default class ContactsApp extends LitElement
 		ContactStore.fetchContacts();
 	}
 
-	firstUpdated() {
-		this.currentContact = ContactStore.getCurrentContact(ContactStore.state);
-	}
-
 	stateChanged(state) {
 		this.currentContact = ContactStore.getCurrentContact(state);
 	}

@@ -32,10 +32,6 @@ export default class ContactActions extends LitElement
 	constructor() {
 		super();
 		ContactStore.addListener(this);
-		this.isFilteringByFavourites = false;
-	}
-
-	firstUpdated() {
 		this.isFilteringByFavourites = ContactStore.getIsFilteringByFavourites(ContactStore.state);
 	}
 

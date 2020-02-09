@@ -48,10 +48,6 @@ export default class ContactDetails extends LitElement
 	constructor() {
 		super();
 		ContactStore.addListener(this);
-		this.contact = null;
-	}
-
-	firstUpdated() {
 		this.contact = ContactStore.getCurrentContact(ContactStore.state);
 	}
 
