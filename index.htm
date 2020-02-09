@@ -3,50 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <style type="text/css">
-        .favourite {
-            background-color: gold;
-        }
+      body {
+        margin: 0;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: linear-gradient(to bottom, #333, #777);
+      }
 
-        #rubrik {
-            color: hotpink;
-        }
+      h1 {
+        margin: 1rem 0;
+        font-weight: bold;
+      }
 
-        .hidden {
-            display: none;
-        }
+      h1:first-child {
+        margin-top: 0;
+      }
 
-        #contact-details {
-          margin: 20px;
-          padding: 10px;
-          border: 1px solid hotpink;
-        }
+      .favourite {
+        background-color: gold;
+      }
 
-        #contact-list {
-          margin: 20px;
-          padding: 10px;
-          border: 1px solid hotpink;
-        }
+      .hidden {
+        display: none;
+      }
 
-        #close-details {
-          display: block;
-          float: right;
-        }
+      #contact-details {
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid hotpink;
+      }
 
-        #favourite {
-          display: block;
-          float: right;
-        }
+      .contact-item {
+        margin: .125rem 0 0;
+        padding: .5rem;
+        font-weight: bold;
+        background: #5d6961;
+      }
 
+      .contact-item:first-child {
+        margin: 0;
+        border-radius: .25rem .25rem 0 0;
+      }
+
+      .contact-item:last-child {
+        border-radius: 0 0 .25rem .25rem;
+      }
+
+      #contact-list ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      #close-details {
+        display: block;
+        float: right;
+      }
+
+      #favourite {
+        display: block;
+        float: right;
+      }
+
+      .wrapper {
+        max-width: 40rem;
+        padding: .5rem;
+      }
+
+      .contact-list__action {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .contact-list__actions {
+        display: flex;
+        justify-content: flex-end;
+      }
     </style>
     <script src="script.js" type="module"></script>
 </head>
 
 <body>
-    <div id="rubrik"><b>Contacts</b></div>
-    <div id="contact-search"><input type="text" id="search" /><button id="search-button">Sök</button></div>
-    <div><a href="#" id="contact-filter">Filtrera favoriter</a></div>
+  <div class="wrapper">
+    <h1 id="title">Contacts</h1>
+    <div class="contact-search">
+      <input type="text" id="search" /><button id="search-button">Sök</button>
+    </div>
+    <div class="contact-list__actions"><a href="#" id="contact-filter" class="contact-list__action">Filtrera favoriter</a></div>
     <div id="contact-list"></div>
     <div id="contact-details"></div>
+  </div>
 </body>
 
 </html>

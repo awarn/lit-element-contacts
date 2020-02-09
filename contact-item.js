@@ -6,7 +6,7 @@ export default class ContactItem {
 	render() {
 		let el = document.createElement("li");
 		el.innerHTML = this.contact.name;
-		el.className = "contact-name";
+		el.className = "contact-item";
 
 		if (this.contact.favourite) {
 			el.classList.add("favourite");
