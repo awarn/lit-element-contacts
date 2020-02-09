@@ -19,24 +19,10 @@
         margin-top: 0;
       }
 
-      #title {
-        margin: 0 1rem;
-      }
-
       .wrapper {
         max-width: 40rem;
         margin: 0 auto;
         padding: .5rem;
-      }
-
-      .contact-list__action {
-        text-decoration: none;
-        color: #fff;
-      }
-
-      .contact-list__actions {
-        display: flex;
-        justify-content: flex-end;
       }
     </style>
     <script src="script.js" type="module"></script>
@@ -44,16 +30,7 @@
 
 <body>
   <div class="wrapper">
-    <h1 id="title">Contacts</h1>
-
-    <contact-search></contact-search>
-
-    <div class="contact-list__actions"><a href="#" id="contact-filter" class="contact-list__action">Filtrera favoriter</a></div>
-    
-    <contact-list></contact-list>
-
-    <contact-details></contact-details>
+    <contacts-app></contacts-app>
   </div>
 </body>
-
 </html>

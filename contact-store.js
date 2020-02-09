@@ -44,6 +44,12 @@ class ContactStore extends Store
 		this.stateChanged();
 	}
 
+	showAllContacts() {
+		this.searchQuery = "";
+		this.isFilteredByFavourites = false;
+		this.stateChanged();
+	}
+
 	async fetchContacts() {
 		try {
 			let response = await fetch("/contacts.json");
@@ -61,10 +67,8 @@ class ContactStore extends Store
 		}
 	}
 
-	showAllContacts() {
-		this.searchQuery = "";
-		this.isFilteredByFavourites = false;
-		this.stateChanged();
+	getIsFilteringByFavourites(state) {
+		return state.isFilteredByFavourites;
 	}
 
 	getContactsList(state) {
@@ -88,7 +92,10 @@ class ContactStore extends Store
 	}
 
 	getCurrentContact(state) {
-		return state.contacts[state.currentContact] || null;
+		let contact = state.contacts[state.currentContact] ? {
+			...state.contacts[state.currentContact]
+		} : null
+		return contact;
 	}
 }
 

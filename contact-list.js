@@ -42,6 +42,10 @@ export default class ContactList extends LitElement
 		this.contacts = [];
 	}
 
+	firstUpdated() {
+		this.contacts = ContactStore.getFilteredContactsList(ContactStore.state);
+	}
+
 	stateChanged(state) {
 		this.contacts = ContactStore.getFilteredContactsList(state);
 	}

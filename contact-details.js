@@ -16,6 +16,8 @@ export default class ContactDetails extends LitElement
 		return css`
 			.contact-details {
 				position: relative;
+				min-height: 20rem;
+				margin: 1rem 0;
 				padding: .5rem;
 				border-radius: .25rem;
 				background: rgb(208, 226, 233);
@@ -42,6 +44,10 @@ export default class ContactDetails extends LitElement
 		super();
 		ContactStore.addListener(this);
 		this.contact = null;
+	}
+
+	firstUpdated() {
+		this.contact = ContactStore.getCurrentContact(ContactStore.state);
 	}
 
 	stateChanged(state) {
