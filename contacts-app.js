@@ -18,7 +18,9 @@ export default class ContactsApp extends LitElement
 	static get styles() {
 		return css`
 			.title {
-				margin: 0 1rem;
+				margin: 0 1rem 1rem;
+				font-weight: bold;
+				margin-top: 0;
 			}
 		`;
 	}
