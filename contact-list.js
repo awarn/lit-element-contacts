@@ -3,7 +3,8 @@ import { LitElement, html, css } from "lit-element";
 import ContactItem from "./contact-item.js"
 import ContactStore from "./contact-store.js"
 
-export default class ContactList extends LitElement {
+export default class ContactList extends LitElement
+{
 	static get properties() {
     return {
 			contacts: { type: Array }
@@ -24,11 +25,13 @@ export default class ContactList extends LitElement {
 
 			li:first-child {
 				margin: 0;
-				border-radius: .25rem .25rem 0 0;
+				border-top-left-radius: .25rem;
+				border-top-right-radius: .25rem;
 			}
 
 			li:last-child {
-				border-radius: 0 0 .25rem .25rem;
+				border-bottom-left-radius: .25rem;
+				border-bottom-right-radius: .25rem;
 			}
     `;
   }
