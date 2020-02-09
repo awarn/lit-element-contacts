@@ -1,17 +1,29 @@
-export default class ContactItem {
-	constructor(contact) {
-		this.contact = contact;
+import { LitElement, html, css } from "lit-element";
+
+export default class ContactItem extends LitElement {
+	static get properties() {
+    return {
+			contact: { type: Object }
+    };
 	}
+
+	static get styles() {
+    return css`
+			.contact-item {
+				padding: .5rem;
+				font-weight: bold;
+				background: #5d6961;
+			}
+    `;
+  }
 
 	render() {
-		let el = document.createElement("li");
-		el.innerHTML = this.contact.name;
-		el.className = "contact-item";
-
-		if (this.contact.favourite) {
-			el.classList.add("favourite");
-		}
-
-		return el;
+		return html`
+			<div class="contact-item ${this.contact.favourite ? "favourite" : ""}">
+				${this.contact.name}
+			</div>
+		`;
 	}
 }
+
+customElements.define("contact-item", ContactItem);

@@ -1,34 +1,64 @@
+import { LitElement, html, css } from "lit-element";
+
 import ContactItem from "./contact-item.js"
 import ContactStore from "./contact-store.js"
 
-export default class ContactList {
+export default class ContactList extends LitElement {
+	static get properties() {
+    return {
+			contacts: { type: Array }
+    };
+	}
+
+	static get styles() {
+    return css`
+      .contact-list {
+        margin: 0;
+        padding: 0;
+			}
+
+			li {
+				margin: .125rem 0 0;
+				overflow: hidden;
+			}
+
+			li:first-child {
+				margin: 0;
+				border-radius: .25rem .25rem 0 0;
+			}
+
+			li:last-child {
+				border-radius: 0 0 .25rem .25rem;
+			}
+    `;
+  }
+
 	constructor() {
+		super();
 		ContactStore.addListener(this);
+		this.contacts = [];
 	}
 
 	stateChanged(state) {
-		let contactListElement = document.getElementById("contact-list");
-		contactListElement.innerHTML = "";
-		contactListElement.appendChild(this.render(
-			ContactStore.getFilteredContactsList(state)
-		));
+		this.contacts = ContactStore.getFilteredContactsList(state);
 	}
 
-	render(contacts) {
-		let listFragment = document.createDocumentFragment();
+	itemClickHander(contact) {
+		ContactStore.setCurrentContact(contact.id);
+	}
 
-		for (let i = 0; i < contacts.length; i++) {
-			const contact = contacts[i];
-			let contactItem = new ContactItem(contact);
-			let el = contactItem.render();
-			el.onclick = () => {
-				ContactStore.setCurrentContact(contact.id);
-			};
-			listFragment.appendChild(el);
-		}
-
-		let listElement = document.createElement("ul");
-		listElement.appendChild(listFragment);
-		return listElement;
+	render() {
+		return html`
+			<ul class="contact-list">
+				${this.contacts.map(contact => html`
+					<li><contact-item
+						.contact="${contact}"
+						@click="${e => this.itemClickHander(e.target.contact)}">${contact.name}</contact-item>
+					</li>
+				`)}
+			</ul>
+		`;
 	}
 }
+
+customElements.define("contact-list", ContactList);
