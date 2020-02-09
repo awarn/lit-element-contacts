@@ -23,10 +23,6 @@ export default class ContactItem extends LitElement
 				background: #3a3d52;
 				cursor: pointer;
 			}
-
-			.contact-item.favourite {
-				background: gold;
-			}
     `;
 	}
 	
