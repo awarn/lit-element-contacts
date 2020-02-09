@@ -67,7 +67,7 @@ export default class ContactDetails extends LitElement
 			<div class="contact-details">
 				<div class="close">
 					<icon-button
-						label="Stäng"
+						label="Close"
 						icon="close"
 						@click="${this.close}"></icon-button>
 				</div>
