@@ -2,7 +2,7 @@ import { LitElement, html, css } from "lit-element";
 
 import ContactStore from "./contact-store.js"
 
-import IconButton from "./icon-button.js"
+import IconButton from "/buttons/icon-button.js"
 
 export default class ContactSearch extends LitElement
 {

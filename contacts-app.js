@@ -1,11 +1,11 @@
 import { LitElement, html, css } from "lit-element";
 
-import ContactStore from "./contact-store.js";
+import ContactStore from "./contacts/contact-store.js";
 
-import ContactDetails from "./contact-details.js";
-import ContactList from "./contact-list.js";
-import ContactSearch from "./contact-search.js";
-import ContactActions from "./contact-actions.js";
+import ContactDetails from "/contacts/contact-details.js";
+import ContactList from "/contacts/contact-list.js";
+import ContactSearch from "/contacts/contact-search.js";
+import ContactActions from "/contacts/contact-actions.js";
 
 export default class ContactsApp extends LitElement
 {
