@@ -54,7 +54,7 @@ export default class ContactSearch extends LitElement
 				<input 
 					type="text"
 					placeholder="Sök"
-					.value="${this.query}" />
+					@change="${e => this.query = e.target.value}" />
 				<button>Sök</button>
 			</form>
 		`;
