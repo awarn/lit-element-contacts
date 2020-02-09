@@ -3,7 +3,9 @@ import { LitElement, html, css } from "lit-element";
 export default class ContactItem extends LitElement {
 	static get properties() {
     return {
-			contact: { type: Object }
+			id: { type: String },
+			name: { type: String },
+			favourite: { type: String }
     };
 	}
 
@@ -14,13 +16,24 @@ export default class ContactItem extends LitElement {
 				font-weight: bold;
 				background: #5d6961;
 			}
+
+			.contact-item.favourite {
+				background: gold;
+			}
     `;
-  }
+	}
+	
+	constructor() {
+		super();
+		this.id = "";
+		this.name = "";
+		this.favourite = "";
+	}
 
 	render() {
 		return html`
-			<div class="contact-item ${this.contact.favourite ? "favourite" : ""}">
-				${this.contact.name}
+			<div class="contact-item ${this.favourite ? "favourite" : ""}">
+				${this.name}
 			</div>
 		`;
 	}

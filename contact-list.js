@@ -43,17 +43,20 @@ export default class ContactList extends LitElement {
 		this.contacts = ContactStore.getFilteredContactsList(state);
 	}
 
-	itemClickHander(contact) {
-		ContactStore.setCurrentContact(contact.id);
+	itemClickHander(contactId) {
+		ContactStore.setCurrentContact(contactId);
 	}
 
 	render() {
 		return html`
 			<ul class="contact-list">
 				${this.contacts.map(contact => html`
-					<li><contact-item
-						.contact="${contact}"
-						@click="${e => this.itemClickHander(e.target.contact)}">${contact.name}</contact-item>
+					<li>
+						<contact-item
+							.id="${contact.id}"
+							.name="${contact.name}"
+							.favourite="${contact.favourite}"
+							@click="${e => this.itemClickHander(e.target.id)}"></contact-item>
 					</li>
 				`)}
 			</ul>
