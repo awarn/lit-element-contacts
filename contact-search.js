@@ -16,10 +16,9 @@ export default class ContactSearch extends LitElement
     return css`
 			.contact-search {
 				display: flex;
-				height: 2rem;
 				margin: 0 1rem;
 				border-radius: .25rem;
-				padding: 0 .5rem 0 0;
+				padding: 0 .75rem 0 0;
 				font-weight: bold;
 				background: #3a3d52;
 				justify-content: space-between;
@@ -29,8 +28,8 @@ export default class ContactSearch extends LitElement
 			input[type="text"] {
 				flex: 1 0;
 				border: none;
-				padding: .5rem;
-				font-size: 1rem;
+				padding: .75rem;
+				font-size: .875rem;
 				font-weight: bold;
 				color: #fff;
 				background: transparent;

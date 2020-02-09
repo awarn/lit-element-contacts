@@ -16,8 +16,8 @@ export default class ContactItem extends LitElement
 				display: flex;
 				width: 100%;
 				border: none;
-				padding: .5rem;
-				font-size: 1rem;
+				padding: .75rem;
+				font-size: .875rem;
 				font-weight: bold;
 				color: #fff;
 				background: #3a3d52;

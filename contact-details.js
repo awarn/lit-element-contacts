@@ -18,7 +18,7 @@ export default class ContactDetails extends LitElement
 				position: relative;
 				min-height: 20rem;
 				margin: 1rem 0;
-				padding: .5rem;
+				padding: .75rem;
 				border-radius: .25rem;
 				background: #b7c0ce;
 				color: #000;
@@ -26,8 +26,8 @@ export default class ContactDetails extends LitElement
 
 			.close {
 				position: absolute;
-				top: .5rem;
-				right: .5rem;
+				top: .75rem;
+				right: .75rem;
 			}
 
 			.email {
@@ -36,6 +36,11 @@ export default class ContactDetails extends LitElement
 
 			.header {
 				display: flex;
+			}
+
+			.name {
+				margin: 0 .75rem .75rem 0;
+				font-weight: bold;
 			}
 		`;
 	}

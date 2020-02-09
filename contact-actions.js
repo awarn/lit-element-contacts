@@ -14,14 +14,14 @@ export default class ContactActions extends LitElement
 		return css`
 			.contact-actions {
 				display: flex;
-				padding: 0 1rem;
+				padding: 1rem 1rem 0;
 				justify-content: flex-end;
 			}
 
 			.filter {
 				border: none;
 				padding: .5rem 0;
-				font-size: 1rem;
+				font-size: .875rem;
 				color: #fff;
 				background: transparent;
 				cursor: pointer;
