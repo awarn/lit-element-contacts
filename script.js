@@ -1,6 +1,8 @@
-import ContactList from "./contact-list.js"
-import ContactStore from "./contact-store.js"
+
 import ContactDetails from "./contact-details.js";
+import ContactList from "./contact-list.js"
+import ContactSearch from "./contact-search.js"
+import ContactStore from "./contact-store.js"
 
 function initFilter() {
 	document.getElementById("contact-filter").onclick = function (e) {
@@ -14,17 +16,7 @@ function initFilter() {
 	};
 }
 
-function initSearch() {
-	document.getElementById("search-button").onclick = function () {
-		let query = document.getElementById("search").value.toLowerCase();
-		ContactStore.searchFor(query);
-	}
-}
-
 window.onload = function () {
-	new ContactDetails();
-	new ContactList();
 	initFilter();
-	initSearch();
 	ContactStore.fetchContacts();
 };
