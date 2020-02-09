@@ -87,7 +87,7 @@ class ContactStore extends Store {
 	}
 
 	getCurrentContact(state) {
-		return state.contacts[state.currentContact];
+		return state.contacts[state.currentContact] || null;
 	}
 }
 
